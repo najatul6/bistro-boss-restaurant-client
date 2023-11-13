@@ -3,10 +3,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from "react";
-import { Rating } from "@smastrom/react-rating";
+import { Rating, Star } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
+import { BiSolidQuoteLeft } from "react-icons/bi";
+
+const myStyles = {
+    itemShapes: Star,
+    activeFillColor: '#CD9003',
+    inactiveFillColor: '#A1A1A1'
+}
 
 const Testimonial = () => {
     const [reviews, setReviews] = useState();
@@ -23,21 +30,32 @@ const Testimonial = () => {
                 heading={"TESTIMONIALS"}
             />
             <div>
-                <Swiper pagination={true} navigation={true} modules={[Pagination, Navigation]} className="mySwiper">
+                <Swiper
+                    loop={true}
+                    autoplay={{
+                        delay: 1500,
+                        disableOnInteraction: false,
+                    }}
+                    pagination={true}
+                    navigation={true}
+                    modules={[Autoplay, Pagination, Navigation]}
+                    className="mySwiper">
                     {
                         reviews?.map(review => <SwiperSlide
                             key={review._id}
                         >
-                            <div>
+                            <div className="md:m-24 flex flex-col justify-center items-center space-y-8">
                                 <Rating
                                     style={{ maxWidth: 180 }}
+                                    itemStyles={myStyles}
                                     value={review.rating}
                                     readOnly
                                 />
-                                <p>
+                                <BiSolidQuoteLeft className="text-7xl font-bold" />
+                                <p className="text-center text-xl">
                                     {review?.details}
                                 </p>
-                                <h2>
+                                <h2 className="text-[#CD9003] text-3xl font-bold">
                                     {review?.name}
                                 </h2>
                             </div>
