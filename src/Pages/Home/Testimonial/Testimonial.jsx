@@ -3,11 +3,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation, Autoplay } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { useEffect, useState } from "react";
+import { BiSolidQuoteLeft } from "react-icons/bi";
 import { Rating, Star } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
-import { BiSolidQuoteLeft } from "react-icons/bi";
 
 const myStyles = {
     itemShapes: Star,
@@ -31,24 +31,26 @@ const Testimonial = () => {
             />
             <div>
                 <Swiper
-                    loop={true}
                     autoplay={{
                         delay: 1500,
                         disableOnInteraction: false,
                     }}
-                    pagination={true}
-                    navigation={true}
-                    modules={[Autoplay, Pagination, Navigation]}
+                    loop={true}
+                    slidesPerView={1}
+                    navigation={{
+                        clickable: true,
+                    }}
+                    modules={[Autoplay, Navigation]}
                     className="mySwiper">
                     {
                         reviews?.map(review => <SwiperSlide
-                            key={review._id}
+                            key={review?._id}
                         >
                             <div className="md:m-24 flex flex-col justify-center items-center space-y-8">
                                 <Rating
                                     style={{ maxWidth: 180 }}
                                     itemStyles={myStyles}
-                                    value={review.rating}
+                                    value={review?.rating}
                                     readOnly
                                 />
                                 <BiSolidQuoteLeft className="text-7xl font-bold" />

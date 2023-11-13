@@ -3,21 +3,56 @@ import { Link, NavLink } from "react-router-dom";
 const NavBar = () => {
     const navitems = <>
         <li>
-            <NavLink to='/'>
+            <NavLink to="/" className="hover:text-white"
+                style={({ isActive }) => {
+                    return {
+                        backgroundColor: isActive ? "transparent" : "",
+                        color: isActive ? "#EEFF25" : "",
+                    };
+                }}
+            >
                 Home
             </NavLink>
         </li>
         <li>
-            <NavLink to='/contact'>Contact Us</NavLink>
+            <NavLink to='/contact' className="hover:text-white"
+                style={({ isActive }) => {
+                    return {
+                        backgroundColor: isActive ? "transparent" : "",
+                        color: isActive ? "#EEFF25" : "",
+                    };
+                }}
+            >Contact Us</NavLink>
         </li>
         <li>
-            <NavLink to='/dashboard'>Dashboard</NavLink>
+            <NavLink to='/dashboard' className="hover:text-white"
+                style={({ isActive }) => {
+                    return {
+                        backgroundColor: isActive ? "transparent" : "",
+                        color: isActive ? "#EEFF25" : "",
+                    };
+                }}
+            >Dashboard</NavLink>
         </li>
         <li>
-            <NavLink to='/ourmenu'>Our Menu</NavLink>
+            <NavLink to='/ourmenu' className="hover:text-white"
+                style={({ isActive }) => {
+                    return {
+                        backgroundColor: isActive ? "transparent" : "",
+                        color: isActive ? "#EEFF25" : "",
+                    };
+                }}
+            >Our Menu</NavLink>
         </li>
         <li>
-            <NavLink to='/ourshop'>Our Shop</NavLink>
+            <NavLink to='/ourshop' className="hover:text-white"
+                style={({ isActive }) => {
+                    return {
+                        backgroundColor: isActive ? "transparent" : "",
+                        color: isActive ? "#EEFF25" : "",
+                    };
+                }}
+            >Our Shop</NavLink>
         </li>
 
     </>

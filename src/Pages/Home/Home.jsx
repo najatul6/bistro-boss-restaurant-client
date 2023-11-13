@@ -1,4 +1,5 @@
 
+import { Helmet } from "react-helmet-async";
 import Banner from "./Banner/Banner";
 import Category from "./Category/Category";
 import ChefRecommend from "./Chef Recommend/ChefRecommend";
@@ -10,6 +11,9 @@ import Testimonial from "./Testimonial/Testimonial";
 const Home = () => {
     return (
         <div >
+            <Helmet>
+                <title>Bistro Boss | Home</title>
+            </Helmet>
             <Banner/>
             <Category/>
             <ChefService/>
