@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
 import Cover from "../../../Components/Cover/Cover";
 import MenuItems from "../../../Common/MenuItems";
 import DetailsButton from "../../../Components/Details Button/DetailsButton";
 import pizzabg from "../../../assets/menu/pizza-bg.jpg"
+import useMenu from "../../../Hooks/useMenu";
 
 const PizzaItem = () => {
-    const [pizzas, setPizzas] = useState()
-    useEffect(() => {
-        fetch('menu.json')
-            .then(res => res.json())
-            .then(data => {
-                const pizzaItems = data.filter(pizza => pizza.category === 'pizza')
-                setPizzas(pizzaItems)
-            })
-    }, [])
+    const [menu] = useMenu();
+    const pizzaItems = menu.filter(item => item.category === 'pizza')
+
+
     return (
         <div>
             <Cover
@@ -24,7 +19,7 @@ const PizzaItem = () => {
             <div className="my-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-5">
                     {
-                        pizzas?.map(item => <MenuItems key={item._id} item={item}></MenuItems>)
+                        pizzaItems?.map(item => <MenuItems key={item._id} item={item}></MenuItems>)
                     }
                 </div>
                 <DetailsButton

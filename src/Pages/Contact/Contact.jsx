@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import Cover from "../../Components/Cover/Cover";
+import contactbg from "../../assets/contact/banner.jpg"
 
 const Contact = () => {
     return (
@@ -6,7 +8,11 @@ const Contact = () => {
             <Helmet>
                 <title>Bistro Boss | Home</title>
             </Helmet>
-            Contact
+            <Cover 
+            bgImage={contactbg}
+            title={"CONTACT US"}
+            details={"Would you like to try a dish?"}
+            />
         </div>
     );
 };

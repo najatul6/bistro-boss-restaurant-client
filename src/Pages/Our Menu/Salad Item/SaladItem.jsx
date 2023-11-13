@@ -1,19 +1,13 @@
-import { useEffect, useState } from "react";
 import Cover from "../../../Components/Cover/Cover";
 import MenuItems from "../../../Common/MenuItems";
 import DetailsButton from "../../../Components/Details Button/DetailsButton";
 import saladbg from '../../../assets/menu/salad-bg.jpg';
+import useMenu from "../../../Hooks/useMenu";
 
 const SaladItem = () => {
-    const [salads, setSalads] = useState()
-    useEffect(() => {
-        fetch('menu.json')
-            .then(res => res.json())
-            .then(data => {
-                const saladstItems = data.filter(salad => salad.category === 'salad')
-                setSalads(saladstItems)
-            })
-    }, [])
+    const [menu] = useMenu();
+    const saladstItems = menu.filter(item => item.category === 'salad')
+
     return (
         <div>
             <Cover
@@ -24,7 +18,7 @@ const SaladItem = () => {
             <div className="my-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-5">
                     {
-                        salads?.map(item => <MenuItems key={item._id} item={item}></MenuItems>)
+                        saladstItems?.map(item => <MenuItems key={item._id} item={item}></MenuItems>)
                     }
                 </div>
                 <DetailsButton

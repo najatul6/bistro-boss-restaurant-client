@@ -7,15 +7,7 @@ import useMenu from "../../../Hooks/useMenu";
 const Desserts = () => {
     const [menu] = useMenu();
     const dessertItems = menu.filter(item => item.category === 'dessert')
-    // const [dessert, setDessert] = useState()
-    // useEffect(() => {
-    //     fetch('menu.json')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             const dessertItems = data.filter(dessert => dessert.category === 'dessert')
-    //             setDessert(dessertItems)
-    //         })
-    // }, [])
+
     return (
         <div>
             <Cover
