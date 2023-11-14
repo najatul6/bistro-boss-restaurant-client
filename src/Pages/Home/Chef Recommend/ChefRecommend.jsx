@@ -1,47 +1,27 @@
+// import FoodCard from "../../../Components/FoodCard/FoodCard";
+import { Link } from "react-router-dom";
+import OrderTab from "../../../Components/OrderTab/OrderTab";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
-import saladImg from "../../../assets/menu/salad-bg.jpg"
-import pizzaImg from "../../../assets/menu/pizza-bg.jpg"
-import soupImg from "../../../assets/menu/soup-bg.jpg"
+import useMenu from "../../../Hooks/useMenu";
 
 const ChefRecommend = () => {
+    const [menu] = useMenu();
+    const popularItem = menu.filter(item => item.category === 'popular');
     return (
         <div className="my-10">
             <SectionTitle
                 subHeading={"Should Try"}
                 heading={"CHEF RECOMMENDS"}
             ></SectionTitle>
-            <div className="grid gap-8 grid-cols-1 lg:grid-cols-3 my-10">
-                <div className="card bg-[#F3F3F3] text-[#151515] shadow-xl rounded-none">
-                    <img src={saladImg} alt="Salad" />
-                    <div className="card-body items-center">
-                        <h2 className="card-title">Caeser Salad</h2>
-                        <p>Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-                        <div className="card-actions">
-                            <button className="btn text-[#BB8506] border-b-[#BB8506] border-b-4 hover:bg-[#1F2937] hover:border-0">add to cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card bg-[#F3F3F3] text-[#151515] shadow-xl rounded-none">
-                    <img src={pizzaImg} alt="Pizza" />
-                    <div className="card-body items-center">
-                        <h2 className="card-title">Pizza</h2>
-                        <p>Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-                        <div className="card-actions">
-                            <button className="btn text-[#BB8506] border-b-[#BB8506] border-b-4 hover:bg-[#1F2937] hover:border-0">add to cart</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card bg-[#F3F3F3] text-[#151515] shadow-xl rounded-none">
-                    <img src={soupImg} alt="Soup" />
-                    <div className="card-body items-center">
-                        <h2 className="card-title">Soup</h2>
-                        <p>Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-                        <div className="card-actions">
-                            <button className="btn text-[#BB8506] border-b-[#BB8506] border-b-4 hover:bg-[#1F2937] hover:border-0">add to cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            <OrderTab
+                items={popularItem}
+            ></OrderTab>
+            <Link to={`/ourshop/Popular`} className="flex justify-center items-center">
+                <button className=" rounded-xl py-5 px-2 md:px-7 bg-transparent text-base md:text-xl hover:bg-[#1F2937] border-0 hover:text-white border-b-[#1F2937] border-b-4 hover:border-b-[#1F2937] ">
+                    ORDER YOUR FAVOURITE FOOD
+                </button>
+            </Link>
         </div>
     );
 };

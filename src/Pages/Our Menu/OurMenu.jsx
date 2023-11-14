@@ -42,7 +42,7 @@ const OurMenu = () => {
                         offeredItem.map(item => <MenuItems key={item._id} item={item}></MenuItems>)
                     }
                 </div>
-                <Link to="/ourshop" className="flex justify-center items-center my-5">
+                <Link to="/ourshop/Offer" className="flex justify-center items-center my-5">
                     <button className=" rounded-xl py-5 px-2 md:px-7 bg-transparent text-base md:text-xl hover:bg-[#1F2937] border-0 hover:text-white border-b-[#1F2937] border-b-4 hover:border-b-[#1F2937] ">
                         ORDER YOUR FAVOURITE FOOD
                     </button>

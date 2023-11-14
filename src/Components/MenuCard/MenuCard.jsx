@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import MenuItems from "../../Common/MenuItems";
 import Cover from "../Cover/Cover";
-
+import PropType from "prop-types"
 
 const MenuCard = ({ items, bgImg, title, details }) => {
 
@@ -30,5 +30,12 @@ const MenuCard = ({ items, bgImg, title, details }) => {
         </div>
     );
 };
+
+MenuCard.propTypes ={
+    items:PropType.any,
+    bgImg:PropType.any,
+    title:PropType.any,
+    details:PropType.any,
+}
 
 export default MenuCard;

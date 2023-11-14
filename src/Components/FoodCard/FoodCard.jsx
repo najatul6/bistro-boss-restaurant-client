@@ -12,7 +12,7 @@ const FoodCard = ({ item }) => {
                 <h2 className="card-title">{name}</h2>
                 <p>{recipe}</p>
                 <div className="card-actions">
-                    <button className="btn text-[#BB8506] border-b-[#BB8506] border-b-4 hover:bg-[#1F2937] hover:border-0">add to cart</button>
+                    <button className="btn text-[#BB8506] border-b-[#BB8506] hover:border-b-[#BB8506] border-b-4 hover:bg-[#1F2937] ">add to cart</button>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@ const FoodCard = ({ item }) => {
 };
 
 FoodCard.propTypes = {
-    item: PropTypes.array,
+    item: PropTypes.any,
 }
 
 export default FoodCard;
