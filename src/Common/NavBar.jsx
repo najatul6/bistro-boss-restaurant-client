@@ -45,7 +45,7 @@ const NavBar = () => {
             >Our Menu</NavLink>
         </li>
         <li>
-            <NavLink to='/ourshop' className="hover:text-white"
+            <NavLink to='/ourshop/Salad' className="hover:text-white"
                 style={({ isActive }) => {
                     return {
                         backgroundColor: isActive ? "transparent" : "",

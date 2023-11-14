@@ -8,6 +8,8 @@ import saladbg from "../../assets/menu/salad-bg.jpg";
 import soupbg from "../../assets/menu/soup-bg.jpg";
 import pizzabg from "../../assets/menu/pizza-bg.jpg";
 import dessertbg from "../../assets/menu/dessert-bg.jpeg";
+import MenuItems from "../../Common/MenuItems";
+import { Link } from "react-router-dom";
 
 const OurMenu = () => {
     const [menu] = useMenu();
@@ -30,63 +32,45 @@ const OurMenu = () => {
             />
 
             {/* Offered Item  */}
-            <div>
+            <div className="my-24">
                 <SectionTitle
                     subHeading={"Don't miss"}
                     heading={"TODAY'S OFFER"}
                 />
-                <MenuCard
-                items={offeredItem}
-                />
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {
+                        offeredItem.map(item => <MenuItems key={item._id} item={item}></MenuItems>)
+                    }
+                </div>
+                <Link to="/ourshop" className="flex justify-center items-center my-5">
+                    <button className=" rounded-xl py-5 px-2 md:px-7 bg-transparent text-base md:text-xl hover:bg-[#1F2937] border-0 hover:text-white border-b-[#1F2937] border-b-4 hover:border-b-[#1F2937] ">
+                        ORDER YOUR FAVOURITE FOOD
+                    </button>
+                </Link>
             </div>
-            
+
             {/* Dessert Items  */}
-            <div>
-                <Cover
-                bgImage={dessertbg}
-                title={"DESSERTS"}
-                details={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-                />
-                <MenuCard
-                    items={dessertItem}
-                ></MenuCard>
-            </div>
+            <MenuCard items={dessertItem} bgImg={dessertbg} title="DESSERTS"
+                details="Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            ></MenuCard>
 
             {/* Pizza Items  */}
-            <div>
-                <Cover
-                bgImage={pizzabg}
-                title={"PIZZA"}
+            <MenuCard
+                items={pizzaItem} bgImg={pizzabg} title={"PIZZA"}
                 details={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-                />
-                <MenuCard
-                    items={pizzaItem}
-                ></MenuCard>
-            </div>
+            ></MenuCard>
 
             {/* Salad Items  */}
-            <div>
-                <Cover
-                bgImage={saladbg}
-                title={"Salads"}
+            <MenuCard
+                items={saladItem} title={"Salads"} bgImg={saladbg}
                 details={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-                />
-                <MenuCard
-                    items={saladItem}
-                ></MenuCard>
-            </div>
+            ></MenuCard>
 
             {/* Soup Items  */}
-            <div>
-                <Cover
-                bgImage={soupbg}
-                title={"SOUPS"}
+            <MenuCard
+                items={soupItem} bgImg={soupbg} title={"SOUPS"}
                 details={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-                />
-                <MenuCard
-                    items={soupItem}
-                ></MenuCard>
-            </div>
+            ></MenuCard>
         </div>
     );
 };

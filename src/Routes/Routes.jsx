@@ -37,7 +37,7 @@ const Routes = createBrowserRouter([
                 element:<OurMenu/>
             },
             {
-                path:'ourshop',
+                path:'ourshop/:category',
                 element:<OurShop/>
             },
             {

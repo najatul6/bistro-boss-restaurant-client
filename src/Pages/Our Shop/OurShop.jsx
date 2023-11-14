@@ -6,17 +6,22 @@ import 'react-tabs/style/react-tabs.css';
 import { useState } from "react";
 import useMenu from "../../Hooks/useMenu";
 import OrderTab from "../../Components/OrderTab/OrderTab";
+import { useParams } from "react-router-dom";
 
 const OurShop = () => {
-    const [tabIndex, setTabIndex] = useState(0);
+    const categories = ['Salad', 'Pizza', 'Soups', 'Desserts', 'Drinks']
+    const { category } = useParams();
+    const initialIndex = categories.indexOf(category);
+    const [tabIndex, setTabIndex] = useState(initialIndex);
     const [menu] = useMenu();
+
     const saladItem = menu.filter(item => item.category === 'salad')
     const pizzaItem = menu.filter(item => item.category === 'pizza')
     const soupItem = menu.filter(item => item.category === 'soup')
     const dessertItem = menu.filter(item => item.category === 'dessert')
     const drinksItem = menu.filter(item => item.category === 'drinks')
-    const offeredItem = menu.filter(item => item.category === 'offered')
-    const popularItem = menu.filter(item => item.category === 'popular')
+    // const offeredItem = menu.filter(item => item.category === 'offered')
+    // const popularItem = menu.filter(item => item.category === 'popular')
 
     return (
         <div>
@@ -29,23 +34,23 @@ const OurShop = () => {
                 details={"Would you like to try a dish?"}
             />
             <div className="my-20">
-                <div className="text-center">
+                <div>
                     <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                         <TabList>
-                            <Tab>Popular</Tab>
-                            <Tab>Offer</Tab>
+                            {/* <Tab>Popular</Tab> */}
+                            {/* <Tab>Offer</Tab> */}
                             <Tab>Salad</Tab>
-                            <Tab>pizza</Tab>
-                            <Tab>soups</Tab>
-                            <Tab>desserts</Tab>
-                            <Tab>drinks</Tab>
+                            <Tab>Pizza</Tab>
+                            <Tab>Soups</Tab>
+                            <Tab>Desserts</Tab>
+                            <Tab>Drinks</Tab>
                         </TabList>
-                        <TabPanel>
+                        {/* <TabPanel>
                             <OrderTab items={popularItem} />
-                        </TabPanel>
-                        <TabPanel>
+                        </TabPanel> */}
+                        {/* <TabPanel>
                             <OrderTab items={offeredItem} />
-                        </TabPanel>
+                        </TabPanel> */}
                         <TabPanel>
                             <OrderTab items={saladItem} />
                         </TabPanel>
