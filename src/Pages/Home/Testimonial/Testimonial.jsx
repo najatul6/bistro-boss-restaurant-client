@@ -35,8 +35,6 @@ const Testimonial = () => {
                         delay: 1500,
                         disableOnInteraction: false,
                     }}
-                    loop={true}
-                    slidesPerView={1}
                     navigation={{
                         clickable: true,
                     }}

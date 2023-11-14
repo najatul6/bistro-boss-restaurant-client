@@ -21,11 +21,11 @@ const Category = () => {
             subHeading={"From 11:00am to 10:00pm"}
             ></SectionTitle>
             <Swiper
-                loop={true}
                 autoplay={{
                     delay: 1500,
                     disableOnInteraction: false,
                 }}
+                loop={true}
                 slidesPerView={4}
                 spaceBetween={10}
                 pagination={{

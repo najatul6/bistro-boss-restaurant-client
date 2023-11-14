@@ -5,8 +5,8 @@ const FoodCard = ({ item }) => {
     return (
         <div className="card bg-[#F3F3F3] text-[#151515] shadow-xl rounded-none">
             <div className='relative'>
-                <img src={image} alt="Salad" />
-                <p className='absolute py-2 px-2 bg-[#111827] text-white right-0 top-1 font-bold text-xl'>${price}</p>
+                <img className='w-full' src={image} alt="Salad" />
+                <p className='absolute py-2 px-2 bg-[#3d3d3d] text-white right-2 top-2 font-bold text-xl'>${price}</p>
             </div>
             <div className="card-body items-center">
                 <h2 className="card-title">{name}</h2>
@@ -19,8 +19,8 @@ const FoodCard = ({ item }) => {
     );
 };
 
-FoodCard.propTypes={
-    item : PropTypes.array,
+FoodCard.propTypes = {
+    item: PropTypes.array,
 }
 
 export default FoodCard;
