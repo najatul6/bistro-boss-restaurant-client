@@ -6,11 +6,11 @@ import { PiFacebookLogoBold } from "react-icons/pi";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const LogIn = () => {
     const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
-    const [validation, setValidation] = useState('Validation')
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
@@ -27,11 +27,10 @@ const LogIn = () => {
         const user_captcha_value = captchaRef.current.value;
         if (validateCaptcha(user_captcha_value)) {
             setDisabled(false);
-            setValidation('Validation Successfull')
         }
-   
+
         else {
-            setValidation('Wrong Chaptcha')
+            setDisabled(true);
         }
     }
 
@@ -72,7 +71,7 @@ const LogIn = () => {
                                         <LoadCanvasTemplate />
                                     </label>
                                     <input ref={captchaRef} type="text" name="captcha" placeholder="Type captcha here" className="input input-bordered" required />
-                                    <button onClick={handleCaptchaValidation} className="btn btn-outline btn-xs mt-4">{validation}</button>
+                                    <button onClick={handleCaptchaValidation} className="btn btn-outline btn-xs mt-4">Validation</button>
                                 </div>
                                 <div className="form-control mt-6">
                                     <button disabled={disabled} type="submit" className="btn bg-[#dbb984] text-xl font-bold text-white">Sign In</button>
@@ -80,9 +79,9 @@ const LogIn = () => {
                             </form>
                             <div className="text-center space-y-5">
                                 <p className="text-[#D1A054] text-xl">
-                                    New here? <span className="font-bold">
+                                    New here? <Link to="/signUp" className="font-bold">
                                         Create a New Account
-                                    </span>
+                                    </Link>
                                 </p>
 
                                 <p className="text-[#444444] text-xl">
