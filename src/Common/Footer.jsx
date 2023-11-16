@@ -7,7 +7,7 @@ const Footer = () => {
                     <h2 className="text-3xl font-medium">CONTACT US</h2>
                     <div className="space-y-3">
                         <p>
-                            123 ABS Street, Uni 21, Bangladesh
+                            Ulipur, Kurigram, Rangpur, Bangladesh
                         </p>
                         <p>
                             +88 01773827414

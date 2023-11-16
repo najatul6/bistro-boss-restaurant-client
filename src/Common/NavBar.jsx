@@ -1,9 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
+import { CgLogIn } from "react-icons/cg";
 
 const NavBar = () => {
     const navitems = <>
         <li>
-            <NavLink to="/" className="hover:text-white"
+            <NavLink to="/" className="hover:text-white md:text-xl"
                 style={({ isActive }) => {
                     return {
                         backgroundColor: isActive ? "transparent" : "",
@@ -15,7 +16,7 @@ const NavBar = () => {
             </NavLink>
         </li>
         <li>
-            <NavLink to='/contact' className="hover:text-white"
+            <NavLink to='/contact' className="hover:text-white md:text-xl"
                 style={({ isActive }) => {
                     return {
                         backgroundColor: isActive ? "transparent" : "",
@@ -25,7 +26,7 @@ const NavBar = () => {
             >Contact Us</NavLink>
         </li>
         <li>
-            <NavLink to='/dashboard' className="hover:text-white"
+            <NavLink to='/dashboard' className="hover:text-white md:text-xl"
                 style={({ isActive }) => {
                     return {
                         backgroundColor: isActive ? "transparent" : "",
@@ -35,7 +36,7 @@ const NavBar = () => {
             >Dashboard</NavLink>
         </li>
         <li>
-            <NavLink to='/ourmenu' className="hover:text-white"
+            <NavLink to='/ourmenu' className="hover:text-white md:text-xl"
                 style={({ isActive }) => {
                     return {
                         backgroundColor: isActive ? "transparent" : "",
@@ -45,7 +46,7 @@ const NavBar = () => {
             >Our Menu</NavLink>
         </li>
         <li>
-            <NavLink to='/ourshop/Popular' className="hover:text-white"
+            <NavLink to='/ourshop/Popular' className="hover:text-white md:text-xl"
                 style={({ isActive }) => {
                     return {
                         backgroundColor: isActive ? "transparent" : "",
@@ -57,7 +58,7 @@ const NavBar = () => {
 
     </>
     return (
-        <div className="navbar fixed z-10 bg-opacity-40 bg-gray-900 text-white max-w-[1920px]">
+        <div className="navbar fixed z-10 bg-opacity-50 bg-gray-900 text-white max-w-[1920px]">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -80,7 +81,9 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <Link to='/signin'>
+                    <button className="btn rounded-xl bg-transparent text-white md:text-xl hover:bg-[#1F2937] border-0 hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4 hover:border-b-[#1F2937]">Log In <CgLogIn /></button>
+                </Link>
             </div>
         </div>
     );
