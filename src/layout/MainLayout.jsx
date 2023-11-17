@@ -4,7 +4,7 @@ import Footer from "../Common/Footer";
 
 const MainLayout = () => {
     const location = useLocation();
-    const hideHeaderFooter = location.pathname.includes('signin')
+    const hideHeaderFooter = location.pathname.includes('signin') || location.pathname.includes('signUp')
     return (
         <div className="max-w-[1920px] mx-auto">
             {hideHeaderFooter || <NavBar />}

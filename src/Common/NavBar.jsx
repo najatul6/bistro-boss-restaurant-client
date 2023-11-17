@@ -1,7 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
 import { CgLogIn } from "react-icons/cg";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handlelogOut=()=>{
+        logOut()
+        .then(data =>{
+            console.log(data)
+        })
+        .catch(error =>{
+            console.log(error.code)
+        })
+    }
+
     const navitems = <>
         <li>
             <NavLink to="/" className="hover:text-white md:text-xl"
@@ -81,9 +95,16 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/signin'>
-                    <button className="btn rounded-xl bg-transparent text-white md:text-xl hover:bg-[#1F2937] border-0 hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4 hover:border-b-[#1F2937]">Log In <CgLogIn /></button>
-                </Link>
+                {
+                    user ? <>
+                            <button onClick={handlelogOut} className="btn rounded-xl bg-transparent text-white md:text-xl hover:bg-[#1F2937] border-0 hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4 hover:border-b-[#1F2937]">Log Out <CgLogIn /></button>
+                    </> : <>
+
+                        <Link to='/signin'>
+                            <button className="btn rounded-xl bg-transparent text-white md:text-xl hover:bg-[#1F2937] border-0 hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4 hover:border-b-[#1F2937]">Log In <CgLogIn /></button>
+                        </Link>
+                    </>
+                }
             </div>
         </div>
     );

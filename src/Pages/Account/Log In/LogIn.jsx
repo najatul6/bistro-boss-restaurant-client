@@ -5,12 +5,17 @@ import { VscGithub } from "react-icons/vsc";
 import { PiFacebookLogoBold } from "react-icons/pi";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const LogIn = () => {
-    const captchaRef = useRef(null);
+    // const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
+
+    const { logIn } = useContext(AuthContext);
+
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
@@ -20,15 +25,36 @@ const LogIn = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+
+        logIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                Swal.fire({
+                    title: "Log In Successful",
+                    showClass: {
+                      popup: `
+                        animate__animated
+                        animate__fadeInDown
+                        animate__faster
+                      `
+                    },
+                    hideClass: {
+                      popup: `
+                        animate__animated
+                        animate__fadeOutUp
+                        animate__faster
+                      `
+                    }
+                  });
+            })
     }
 
-    const handleCaptchaValidation = () => {
-        const user_captcha_value = captchaRef.current.value;
+    const handleCaptchaValidation = e => {
+        const user_captcha_value = e.target.value;
         if (validateCaptcha(user_captcha_value)) {
             setDisabled(false);
         }
-
         else {
             setDisabled(true);
         }
@@ -37,7 +63,7 @@ const LogIn = () => {
     return (
         <div>
             <Helmet>
-                <title>Bistro Boss | Home</title>
+                <title>Bistro Boss | Sign In</title>
             </Helmet>
             <div className="min-h-screen py-8"
                 style={{ backgroundImage: `url(${loginbg})` }}
@@ -55,7 +81,7 @@ const LogIn = () => {
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="email" name="email" placeholder="Enter YOur Email" className="input input-bordered" required />
+                                    <input type="email" name="email" placeholder="Type here" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -70,8 +96,8 @@ const LogIn = () => {
                                     <label className="label">
                                         <LoadCanvasTemplate />
                                     </label>
-                                    <input ref={captchaRef} type="text" name="captcha" placeholder="Type captcha here" className="input input-bordered" required />
-                                    <button onClick={handleCaptchaValidation} className="btn btn-outline btn-xs mt-4">Validation</button>
+                                    <input onBlur={handleCaptchaValidation} type="text" name="captcha" placeholder="Type captcha here" className="input input-bordered" required />
+                                    {/* <button  className="btn btn-outline btn-xs mt-4">Validation</button> */}
                                 </div>
                                 <div className="form-control mt-6">
                                     <button disabled={disabled} type="submit" className="btn bg-[#dbb984] text-xl font-bold text-white">Sign In</button>

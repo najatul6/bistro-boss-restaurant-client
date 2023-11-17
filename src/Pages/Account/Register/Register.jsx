@@ -5,12 +5,34 @@ import { AiFillGoogleCircle } from "react-icons/ai";
 import signupimg from "../../../assets/others/authentication2.png"
 import signupbg from "../../../assets/others/authentication.png"
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const Register = () => {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const {createuser} = useContext(AuthContext);
+
+    const onSubmit = (data) => {
+        console.log(data)
+        createuser(data.email, data.password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser)
+        })
+    }
+
+
     return (
         <div>
             <Helmet>
-                <title>Bistro Boss | Home</title>
+                <title>Bistro Boss | Sign Up</title>
             </Helmet>
 
             <div className="min-h-screen py-8"
@@ -24,24 +46,35 @@ const Register = () => {
                             <img className="w-full" src={signupimg} alt="" />
                         </div>
                         <div className="card md:w-1/2 max-w-sm">
-                            <form className="card-body" >
+                            <form onSubmit={handleSubmit(onSubmit)} className="card-body" >
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Name</span>
                                     </label>
-                                    <input type="text" name="name" placeholder="Type here" className="input input-bordered" required />
+                                    <input type="text" {...register("name", { required: true })} name="name" placeholder="Type here" className="input input-bordered" />
+                                    {errors.name && <span className="text-red-600 font-bold">Name is required</span>}
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="email" name="email" placeholder="Type here" className="input input-bordered" required />
+                                    <input type="email" {...register("email", { required: true })} name="email" placeholder="Type here" className="input input-bordered" />
+                                    {errors.email && <span className="text-red-600 font-bold">Email is required</span>}
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input name="password" type="password" placeholder="Type here" className="input input-bordered" required />
+                                    <input {...register("password", { required: true,
+                                         minLength: 6,
+                                          maxLength: 16,
+                                          pattern:/(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z].*[a-z])/,
+                                          })} name="password" type="password" placeholder="Type here" className="input input-bordered" />
+                                    {errors.password?.type === "required" && (<p className="text-red-600">Password is required</p>)}
+                                    {errors.password?.type === "minLength" && (<p className="text-red-600">Password Must be 6 Characters</p>)}
+                                    {errors.password?.type === "maxLength" && (<p className="text-red-600">Password Must be 16 Characters</p>)}
+                                    {errors.password?.type === "pattern" && (<p className="text-red-600">Password Must have a uppercase, a lowercase and a spacial character</p>)}
+
                                 </div>
                                 <div className="form-control mt-6">
                                     <button type="submit" className="btn bg-[#dbb984] text-xl font-bold text-white">Sign Up</button>
