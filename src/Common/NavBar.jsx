@@ -140,14 +140,17 @@ const NavBar = () => {
                                     <img src={user?.photoURL} />
                                 </div>
                             </label>
-                            <ul tabIndex={0} className="mt-3 z-[1] p-5 shadow text-[#EEFF25] hover:bg-none menu menu-sm dropdown-content hover:text-[#EEFF25] bg-gray-900 rounded-box">
-                                <li>
-                                    {user.displayName}
-                                </li>
-                                <li>
-                                    {user.email}
-                                </li>
-                                <button onClick={handlelogOut} className="btn my-1 bg-[#f16022] text-white">Log Out <CgLogIn /></button>
+                            <ul tabIndex={0} className="mt-3 z-[1]shadow text-[#EEFF25] hover:bg-none menu menu-sm dropdown-content bg-gray-900 rounded-box">
+                                <div className="px-5 ">
+                                    <li className="font-bold capitalize">
+                                        {user?.displayName}
+                                    </li>
+                                    <li className="text-[#edff25a3]">
+                                        {user?.email}
+                                    </li>
+                                </div>
+                                <hr className="mt-5"/>
+                                <button onClick={handlelogOut} className="flex justify-center items-center rounded-b-xl py-2 gap-2 w-full bg-transparent text-white md:text-xl hover:bg-[#1F2937] hover:border-b-[#EEFF25] hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4">Log Out <CgLogIn /></button>
                             </ul>
                         </div>
                         :
