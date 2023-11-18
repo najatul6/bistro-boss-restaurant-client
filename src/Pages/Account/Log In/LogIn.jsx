@@ -6,20 +6,23 @@ import { PiFacebookLogoBold } from "react-icons/pi";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 
 const LogIn = () => {
-    // const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
+    const { logIn, googleLogIn, facebookLogin, githubLogIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const { logIn } = useContext(AuthContext);
+    const from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
 
+    // Email Log In
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
@@ -33,23 +36,110 @@ const LogIn = () => {
                 Swal.fire({
                     title: "Log In Successful",
                     showClass: {
-                      popup: `
+                        popup: `
                         animate__animated
                         animate__fadeInDown
                         animate__faster
                       `
                     },
                     hideClass: {
-                      popup: `
+                        popup: `
                         animate__animated
                         animate__fadeOutUp
                         animate__faster
                       `
                     }
-                  });
+                });
+                navigate(from, { replace: true });
+            })
+    };
+
+    // Facebook Log In
+    const handleFacebookLogIn = e => {
+        e.preventDefault();
+        facebookLogin()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                Swal.fire({
+                    title: "Log In Successful With Facebook",
+                    showClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeInDown
+                    animate__faster
+                  `
+                    },
+                    hideClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeOutUp
+                    animate__faster
+                  `
+                    }
+                });
+                navigate(from, { replace: true });
             })
     }
 
+    // Google Log In
+    const handleGoogleLogIn = e => {
+        e.preventDefault();
+        googleLogIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                Swal.fire({
+                    title: "Log In Successful With Google",
+                    showClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeInDown
+                    animate__faster
+                  `
+                    },
+                    hideClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeOutUp
+                    animate__faster
+                  `
+                    }
+                });
+                navigate(from, { replace: true });
+            })
+    }
+
+    // Github Log In
+    const handleGithubLogIn = e => {
+        e.preventDefault();
+        githubLogIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                Swal.fire({
+                    title: "Log In Successful With Github",
+                    showClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeInDown
+                    animate__faster
+                  `
+                    },
+                    hideClass: {
+                        popup: `
+                    animate__animated
+                    animate__fadeOutUp
+                    animate__faster
+                  `
+                    }
+                });
+                navigate(from, { replace: true });
+            })
+    }
+
+
+    // Captcha Check
     const handleCaptchaValidation = e => {
         const user_captcha_value = e.target.value;
         if (validateCaptcha(user_captcha_value)) {
@@ -97,7 +187,6 @@ const LogIn = () => {
                                         <LoadCanvasTemplate />
                                     </label>
                                     <input onBlur={handleCaptchaValidation} type="text" name="captcha" placeholder="Type captcha here" className="input input-bordered" required />
-                                    {/* <button  className="btn btn-outline btn-xs mt-4">Validation</button> */}
                                 </div>
                                 <div className="form-control mt-6">
                                     <button disabled={disabled} type="submit" className="btn bg-[#dbb984] text-xl font-bold text-white">Sign In</button>
@@ -114,9 +203,9 @@ const LogIn = () => {
                                     Or sign in with
                                 </p>
                                 <div className="flex justify-center gap-6">
-                                    <button className="md:text-4xl text-3xl text-[#444444]"><PiFacebookLogoBold /></button>
-                                    <button className="md:text-4xl text-3xl text-[#444444]"><AiFillGoogleCircle /></button>
-                                    <button className="md:text-4xl text-3xl text-[#444444]"><VscGithub /></button>
+                                    <button onClick={handleFacebookLogIn} className="md:text-4xl text-3xl text-[#444444]"><PiFacebookLogoBold /></button>
+                                    <button onClick={handleGoogleLogIn} className="md:text-4xl text-3xl text-[#444444]"><AiFillGoogleCircle /></button>
+                                    <button onClick={handleGithubLogIn} className="md:text-4xl text-3xl text-[#444444]"><VscGithub /></button>
                                 </div>
                             </div>
                         </div>
