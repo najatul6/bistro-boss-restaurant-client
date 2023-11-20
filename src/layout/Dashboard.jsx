@@ -64,7 +64,7 @@ const Dashboard = () => {
     return (
         <div className="flex min-h-screen max-w-[1920px] mx-auto">
             {/* Dashboard Side Bar  */}
-            <div className="w-[280px] min-h-full bg-[#D1A054] py-12">
+            <div className="w-[280px] min-h-full bg-[#D1A054] py-12 lg:fixed lg:left-0 lg:top-0 lg:overflow-y-auto">
 
                 <div className="mb-5 px-7">
                     <p className="text-base font-bold md:text-3xl md:font-extrabold">
@@ -208,14 +208,14 @@ const Dashboard = () => {
                 </ul>
                 {
                     user ?
-                        <button onClick={handlelogOut} className="rounded-t-xl border-2 flex justify-center w-full items-center py-2 gap-2 w-full bg-transparent text-white md:text-xl hover:bg-[#1F2937] hover:border-b-[#EEFF25] hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4">Log Out <CgLogIn /></button>
+                        <button onClick={handlelogOut} className="rounded-t-xl border-2 flex justify-center w-full items-center py-2 gap-2 bg-transparent text-white md:text-xl hover:bg-[#1F2937] hover:border-b-[#EEFF25] hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4">Log Out <CgLogIn /></button>
                         :
                         ''
                 }
             </div>
 
             {/* Dashboard Main Content  */}
-            <div className="flex-1 mx-auto">
+            <div className="flex-1 mx-auto bg-[#F6F6F6] p-8 lg:ml-[280px] lg:overflow-y-auto">
                 <Outlet></Outlet>
             </div>
         </div>
