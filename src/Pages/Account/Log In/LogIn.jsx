@@ -15,7 +15,7 @@ const LogIn = () => {
     const { logIn, googleLogIn, facebookLogin, githubLogIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-
+    const [errmsg, seterrmsg] = useState();
     const from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
@@ -51,6 +51,9 @@ const LogIn = () => {
                     }
                 });
                 navigate(from, { replace: true });
+            })
+            .catch(error =>{
+                seterrmsg (error.code);
             })
     };
 
@@ -188,6 +191,9 @@ const LogIn = () => {
                                     </label>
                                     <input onBlur={handleCaptchaValidation} type="text" name="captcha" placeholder="Type captcha here" className="input input-bordered" required />
                                 </div>
+                                {
+                                    errmsg? <p>{errmsg}</p>: ''
+                                }
                                 <div className="form-control mt-6">
                                     <button disabled={disabled} type="submit" className="btn bg-[#dbb984] text-xl font-bold text-white">Sign In</button>
                                 </div>

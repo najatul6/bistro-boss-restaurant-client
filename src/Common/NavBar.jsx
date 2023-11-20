@@ -3,10 +3,12 @@ import { CgLogIn } from "react-icons/cg";
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import { GiShoppingCart } from "react-icons/gi";
+import useCarts from "../Hooks/useCarts";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
-    console.log(user)
+    const [cart] = useCarts();
     const handlelogOut = () => {
         logOut()
             .then(data => {
@@ -76,16 +78,7 @@ const NavBar = () => {
                 }}
             >Contact Us</NavLink>
         </li>
-        <li>
-            <NavLink to='/dashboard' className="hover:text-white md:text-xl"
-                style={({ isActive }) => {
-                    return {
-                        backgroundColor: isActive ? "transparent" : "",
-                        color: isActive ? "#EEFF25" : "",
-                    };
-                }}
-            >Dashboard</NavLink>
-        </li>
+
         <li>
             <NavLink to='/ourmenu' className="hover:text-white md:text-xl"
                 style={({ isActive }) => {
@@ -120,9 +113,11 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <Link>
-                    <button className="btn-ghost normal-case text-xl md:text-3xl font-extrabold">
-                        BISTRO BOSS
-                        <p className="tracking-[6px] text-base md:text-2xl font-bold">Restaurant</p>
+                    <button className="btn-ghost normal-case">
+                        <p className="text-base font-bold md:text-3xl md:font-extrabold">
+                            BISTRO BOSS
+                        </p>
+                        <p className="tracking-[2px] md:tracking-[6px] text-sm md:text-2xl font-bold">Restaurant</p>
                     </button>
                 </Link>
             </div>
@@ -134,24 +129,59 @@ const NavBar = () => {
             <div className="navbar-end">
                 {
                     user ?
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-32 rounded-full ring ring-[#EEFF25]">
-                                    <img src={user?.photoURL} />
+                        <div className="flex justify-center items-center md:gap-6">
+                            <li className="navbar">
+                                <NavLink to='/dashboard/mycart' className="hover:text-white md:text-xl"
+                                    style={({ isActive }) => {
+                                        return {
+                                            backgroundColor: isActive ? "transparent" : "",
+                                            color: isActive ? "#EEFF25" : "",
+                                        };
+                                    }}
+                                >
+                                    <div className="relative">
+                                        <button className="text-4xl font-extrabold p-2"> <GiShoppingCart /></button>
+                                        <div className="absolute -right-1 -bottom-2 rounded-full w-6 h-6 flex justify-center items-center p-4">
+                                            <p className="text-sm font-bold text-white bg-[#EEFF25] bg-opacity-70 p-1 rounded-full">+{cart.length}</p>
+                                        </div>
+                                    </div>
+                                </NavLink>
+                            </li>
+
+                            <div className="dropdown dropdown-end">
+                                <div>
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-32 rounded-full ring ring-[#EEFF25]">
+                                            <img src={user?.photoURL} />
+                                        </div>
+                                    </label>
+                                    <ul tabIndex={0} className="mt-4 z-[1]shadow hover:bg-none menu menu-sm dropdown-content bg-gray-900 rounded-box">
+                                        <div className="px-5 text-white">
+                                            <li className="font-bold capitalize">
+                                                {user?.displayName}
+                                            </li>
+                                            <li className="text-[#ffffff83] pl-2">
+                                                {user?.email}
+                                            </li>
+                                        </div>
+                                        <hr className="my-5" />
+                                        <div>
+                                            <li>
+                                                <NavLink to='/dashboard' className="hover:text-white md:text-xl"
+                                                    style={({ isActive }) => {
+                                                        return {
+                                                            backgroundColor: isActive ? "transparent" : "",
+                                                            color: isActive ? "#EEFF25" : "",
+                                                        };
+                                                    }}
+                                                >Dashboard</NavLink>
+                                            </li>
+                                        </div>
+                                        <hr className="mt-5" />
+                                        <button onClick={handlelogOut} className="flex justify-center items-center rounded-b-xl py-2 gap-2 w-full bg-transparent text-white md:text-xl hover:bg-[#1F2937] hover:border-b-[#EEFF25] hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4">Log Out <CgLogIn /></button>
+                                    </ul>
                                 </div>
-                            </label>
-                            <ul tabIndex={0} className="mt-3 z-[1]shadow text-[#EEFF25] hover:bg-none menu menu-sm dropdown-content bg-gray-900 rounded-box">
-                                <div className="px-5 ">
-                                    <li className="font-bold capitalize">
-                                        {user?.displayName}
-                                    </li>
-                                    <li className="text-[#edff25a3]">
-                                        {user?.email}
-                                    </li>
-                                </div>
-                                <hr className="mt-5"/>
-                                <button onClick={handlelogOut} className="flex justify-center items-center rounded-b-xl py-2 gap-2 w-full bg-transparent text-white md:text-xl hover:bg-[#1F2937] hover:border-b-[#EEFF25] hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4">Log Out <CgLogIn /></button>
-                            </ul>
+                            </div>
                         </div>
                         :
                         <Link to='/signin'>

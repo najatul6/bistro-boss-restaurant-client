@@ -2,14 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import Contact from "../Pages/Contact/Contact";
-import Dashboard from "../Pages/Dashboard/Dashboard";
-import MyCart from "../Pages/My Cart/MyCart";
 import OurMenu from "../Pages/Our Menu/OurMenu";
 import OurShop from "../Pages/Our Shop/OurShop";
 import Register from "../Pages/Account/Register/Register";
 import LogIn from "../Pages/Account/Log In/LogIn";
 import ErrorPage from "../Error Page/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layout/Dashboard";
+import MyCart from "../Pages/UserDashboard/MyCart/MyCart";
 
 const Routes = createBrowserRouter([
     {
@@ -26,20 +26,12 @@ const Routes = createBrowserRouter([
                 element:<PrivateRoute><Contact/></PrivateRoute>
             },
             {
-                path:'dashboard',
-                element:<Dashboard/>
-            },
-            {
-                path:'mycart',
-                element:<MyCart/>
-            },
-            {
                 path:'ourmenu',
                 element:<OurMenu/>
             },
             {
                 path:'ourshop/:category',
-                element:<PrivateRoute><OurShop/></PrivateRoute>
+                element:<OurShop/>
             },
             {
                 path:'signUp',
@@ -48,6 +40,16 @@ const Routes = createBrowserRouter([
             {
                 path:'signIn',
                 element:<LogIn/>
+            }
+        ]
+    },
+    {
+        path:'dashboard',
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path:'/dashboard/mycart',
+                element:<MyCart></MyCart>
             }
         ]
     }
