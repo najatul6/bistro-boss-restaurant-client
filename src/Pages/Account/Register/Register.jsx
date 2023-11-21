@@ -1,149 +1,70 @@
 import { Helmet } from "react-helmet-async";
-import { VscGithub } from "react-icons/vsc";
-import { PiFacebookLogoBold } from "react-icons/pi";
-import { AiFillGoogleCircle } from "react-icons/ai";
 import signupimg from "../../../assets/others/authentication2.png"
 import signupbg from "../../../assets/others/authentication.png"
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import SocialLogIn from "../Social Account/SocialLogIn";
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic();
     const {
         register,
         handleSubmit,
         reset,
         formState: { errors },
     } = useForm();
-    const { createuser,logOut, updateUserProfile, googleLogIn, facebookLogin, githubLogIn } = useContext(AuthContext);
-
+    const { createuser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
-    const location = useLocation();
     const [signError, setsignError] = useState();
-    const from = location.state?.from?.pathname || "/";
 
     // Sign in with Email Password
     const onSubmit = (data) => {
         createuser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser)
-                updateUserProfile(data.name, data.photoUrl)
-                    .then(() => {
-                        Swal.fire({
-                            title: "User Created Successful",
-                            showClass: {
-                                popup: `
-                        animate__animated
-                        animate__fadeInUp
-                        animate__faster
-                      `
-                            },
-                            hideClass: {
-                                popup: `
-                        animate__animated
-                        animate__fadeOutDown
-                        animate__faster
-                      `
+                if (loggedUser) {
+                    updateUserProfile(data.name, data.photoUrl)
+                        .then(() => {
+                            const userInfo = {
+                                name: data.name,
+                                email: data.email,
                             }
-                        });
-                        reset();
-                        logOut()
-                        navigate('/signIn');
-                    })
-                    .catch(error=>{
-                        console.log(error)
-                    })
+                            axiosPublic.post('/users', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        Swal.fire({
+                                            title: "User Created Successful",
+                                            showClass: {
+                                                popup: `
+                                        animate__animated
+                                        animate__fadeInUp
+                                        animate__faster
+                                      `
+                                            },
+                                            hideClass: {
+                                                popup: `
+                                        animate__animated
+                                        animate__fadeOutDown
+                                        animate__faster
+                                      `
+                                            }
+                                        });
+                                        reset();
+                                        navigate('/signIn');
+                                    }
+                                })
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                }
             })
             .catch(error => {
                 setsignError(error.code)
-            })
-    };
-
-
-    // Facebook Sign In
-    const handleFacebookLogIn = e => {
-        e.preventDefault();
-        facebookLogin()
-            .then(result => {
-                const user = result.user;
-                console.log(user)
-                Swal.fire({
-                    title: "Log In Successful With Facebook",
-                    showClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeInDown
-                    animate__faster
-                  `
-                    },
-                    hideClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeOutUp
-                    animate__faster
-                  `
-                    }
-                });
-                navigate(from, { replace: true });
-            })
-    };
-
-    // Google Sign In
-    const handleGoogleLogIn = e => {
-        e.preventDefault();
-        googleLogIn()
-            .then(result => {
-                const user = result.user;
-                console.log(user)
-                Swal.fire({
-                    title: "Log In Successful With Google",
-                    showClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeInDown
-                    animate__faster
-                  `
-                    },
-                    hideClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeOutUp
-                    animate__faster
-                  `
-                    }
-                });
-                navigate(from, { replace: true });
-            })
-    };
-
-    // Github Sign In
-    const handleGithubLogIn = e => {
-        e.preventDefault();
-        githubLogIn()
-            .then(result => {
-                const user = result.user;
-                console.log(user)
-                Swal.fire({
-                    title: "Log In Successful With Github",
-                    showClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeInDown
-                    animate__faster
-                  `
-                    },
-                    hideClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeOutUp
-                    animate__faster
-                  `
-                    }
-                });
-                navigate(from, { replace: true });
             })
     };
 
@@ -227,11 +148,7 @@ const Register = () => {
                                 <p className="text-[#444444] text-xl">
                                     Or sign in with
                                 </p>
-                                <div className="flex justify-center gap-6">
-                                    <button onClick={handleFacebookLogIn} className="md:text-4xl text-3xl text-[#444444]"><PiFacebookLogoBold /></button>
-                                    <button onClick={handleGoogleLogIn} className="md:text-4xl text-3xl text-[#444444]"><AiFillGoogleCircle /></button>
-                                    <button onClick={handleGithubLogIn} className="md:text-4xl text-3xl text-[#444444]"><VscGithub /></button>
-                                </div>
+                                <SocialLogIn/>
                             </div>
                         </div>
                     </div>

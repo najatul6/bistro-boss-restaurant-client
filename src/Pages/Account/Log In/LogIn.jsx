@@ -1,18 +1,16 @@
 import { Helmet } from "react-helmet-async";
 import loginbg from "../../../assets/others/authentication.png"
 import loginimg from "../../../assets/others/authentication1.png"
-import { VscGithub } from "react-icons/vsc";
-import { PiFacebookLogoBold } from "react-icons/pi";
-import { AiFillGoogleCircle } from "react-icons/ai";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogIn from "../Social Account/SocialLogIn";
 
 const LogIn = () => {
     const [disabled, setDisabled] = useState(true);
-    const { logIn, googleLogIn, facebookLogin, githubLogIn } = useContext(AuthContext);
+    const { logIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const [errmsg, seterrmsg] = useState();
@@ -56,91 +54,6 @@ const LogIn = () => {
                 seterrmsg (error.code);
             })
     };
-
-    // Facebook Log In
-    const handleFacebookLogIn = e => {
-        e.preventDefault();
-        facebookLogin()
-            .then(result => {
-                const user = result.user;
-                console.log(user)
-                Swal.fire({
-                    title: "Log In Successful With Facebook",
-                    showClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeInDown
-                    animate__faster
-                  `
-                    },
-                    hideClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeOutUp
-                    animate__faster
-                  `
-                    }
-                });
-                navigate(from, { replace: true });
-            })
-    }
-
-    // Google Log In
-    const handleGoogleLogIn = e => {
-        e.preventDefault();
-        googleLogIn()
-            .then(result => {
-                const user = result.user;
-                console.log(user)
-                Swal.fire({
-                    title: "Log In Successful With Google",
-                    showClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeInDown
-                    animate__faster
-                  `
-                    },
-                    hideClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeOutUp
-                    animate__faster
-                  `
-                    }
-                });
-                navigate(from, { replace: true });
-            })
-    }
-
-    // Github Log In
-    const handleGithubLogIn = e => {
-        e.preventDefault();
-        githubLogIn()
-            .then(result => {
-                const user = result.user;
-                console.log(user)
-                Swal.fire({
-                    title: "Log In Successful With Github",
-                    showClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeInDown
-                    animate__faster
-                  `
-                    },
-                    hideClass: {
-                        popup: `
-                    animate__animated
-                    animate__fadeOutUp
-                    animate__faster
-                  `
-                    }
-                });
-                navigate(from, { replace: true });
-            })
-    }
-
 
     // Captcha Check
     const handleCaptchaValidation = e => {
@@ -208,11 +121,7 @@ const LogIn = () => {
                                 <p className="text-[#444444] text-xl">
                                     Or sign in with
                                 </p>
-                                <div className="flex justify-center gap-6">
-                                    <button onClick={handleFacebookLogIn} className="md:text-4xl text-3xl text-[#444444]"><PiFacebookLogoBold /></button>
-                                    <button onClick={handleGoogleLogIn} className="md:text-4xl text-3xl text-[#444444]"><AiFillGoogleCircle /></button>
-                                    <button onClick={handleGithubLogIn} className="md:text-4xl text-3xl text-[#444444]"><VscGithub /></button>
-                                </div>
+                                <SocialLogIn/>
                             </div>
                         </div>
                     </div>

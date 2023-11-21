@@ -15,6 +15,8 @@ import Swal from "sweetalert2";
 
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext);
+    // TODO: get is admin  vaulue from the database 
+    const isAdmin = true;
     const handlelogOut = () => {
         logOut()
             .then(data => {
