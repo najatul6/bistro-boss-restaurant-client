@@ -1,11 +1,25 @@
 import { IoIosRestaurant } from "react-icons/io";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form"
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+
+const image_hosting_key= import.meta.env.VITE_IMAGE_HOSTING;
+const image_hosting_api =`https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Additems = () => {
-    const { register, handleSubmit } = useForm()
-    const onSubmit = (data) => console.log(data)
+    const { register, handleSubmit } = useForm();
+    const axiosPublic = useAxiosPublic();
+    const onSubmit = async(data) => {
+        // Upload this image and get a url and set it 
+        const imageFile = {image: data.image[0]}
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers:{
 
+                'content-Type' :'multipart/form-data'
+            }
+        });
+        console.log(res.data)
+    }
     return (
         <div>
             <SectionTitle
@@ -31,9 +45,10 @@ const Additems = () => {
                                 <span className="label-text font-bold text-xl">Category*</span>
                             </label>
                             <select
+                            defaultValue="default"
                                 {...register("category", { required: true })}
                                 className="select select-bordered w-full">
-                                <option disabled selected>Category</option>
+                                <option disabled value="default">Category</option>
                                 <option value="popular">Popular</option>
                                 <option value="offered">Offer</option>
                                 <option value="salad">Salad</option>
