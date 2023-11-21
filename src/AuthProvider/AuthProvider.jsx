@@ -2,13 +2,17 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../Config/firebase.config";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-
+    const googleprovider = new GoogleAuthProvider();
+    const facebookprovider = new FacebookAuthProvider();
+    const githubprovider = new GithubAuthProvider();
+    const axiosPublic = useAxiosPublic();
     const createuser = (email, password) => {
         setIsLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
@@ -26,10 +30,6 @@ const AuthProvider = ({ children }) => {
             displayName: name, photoURL: photo
         });
     }
-
-    const googleprovider = new GoogleAuthProvider();
-    const facebookprovider = new FacebookAuthProvider();
-    const githubprovider = new GithubAuthProvider();
 
     // Facebook Log In
     const facebookLogin = () => {
@@ -60,9 +60,17 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             if(currentUser){
                 // Get token And storeed client
+                const userInfo ={email: currentUser.email};
+                axiosPublic.post('/jwt', userInfo )
+                .then(res=>{
+                    if(res.data.token){
+                        localStorage.setItem('access-token', res.data.token)
+                    }
+                })
             }
             else{
                 // TODO: REMOVE TOKEN
+                localStorage.removeItem('access-token');
             }
             setIsLoading(false);
         });

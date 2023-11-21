@@ -54,7 +54,7 @@ const Register = () => {
                                             }
                                         });
                                         reset();
-                                        navigate('/signIn');
+                                        navigate('/');
                                     }
                                 })
                         })

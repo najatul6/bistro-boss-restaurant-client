@@ -36,9 +36,9 @@ const FoodCard = ({ item }) => {
                 })
         } else {
             Swal.fire({
-                title: "Are you order this food?",
+                title: "Do you want to order this food?",
                 text: "Please Log in Fast",
-                icon: "warning",
+                icon: "question",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
