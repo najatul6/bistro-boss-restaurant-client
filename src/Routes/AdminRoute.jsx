@@ -1,10 +1,11 @@
 import { Navigate, useLocation } from "react-router-dom";
-import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
-import spiningimg from "../assets/others/loader3.gif";
 
-const AdminRoute = (children) => {
-    const [user, isLoading] = useAuth();
+import spiningimg from "../assets/others/loader3.gif";
+import useAdmin from "../Hooks/useAdmin";
+
+const AdminRoute = ({ children }) => {
+    const { user, isLoading } = useAuth();
     const [isAdmin, isAdminLoading] = useAdmin();
     const location = useLocation();
     if (isLoading || isAdminLoading) {
@@ -13,8 +14,7 @@ const AdminRoute = (children) => {
     if (user && isAdmin) {
         return children;
     }
-
-    return <Navigate to="/signIn" state={{ form: location }} replace></Navigate>
+    return <Navigate to='/' state={{ from: location }} replace></Navigate>
 };
 
 export default AdminRoute;

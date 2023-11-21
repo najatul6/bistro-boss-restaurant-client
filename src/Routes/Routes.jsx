@@ -15,6 +15,7 @@ import Additems from "../Pages/Admin Dashboard/Add items/Additems";
 import Manageitems from "../Pages/Admin Dashboard/Manage items/Manageitems";
 import Managebookings from "../Pages/Admin Dashboard/Manage bookings/Managebookings";
 import Allusers from "../Pages/Admin Dashboard/Allusers/Allusers";
+import AdminRoute from "./AdminRoute";
 
 const Routes = createBrowserRouter([
     {
@@ -53,6 +54,7 @@ const Routes = createBrowserRouter([
         path:'dashboard',
         element:<Dashboard></Dashboard>,
         children:[
+            // user Section 
             {
                 path:'mycart',
                 element:<MyCart></MyCart>
@@ -63,23 +65,23 @@ const Routes = createBrowserRouter([
             // Admin Section 
             {
                 path:'adminhome',
-                element:<AdminHome/>
+                element:<AdminRoute><AdminHome/></AdminRoute>
             },
             {
                 path:'additem',
-                element:<Additems/>
+                element:<AdminRoute><Additems/></AdminRoute> 
             },
             {
                 path:'manageitems',
-                element:<Manageitems/>
+                element:<AdminRoute><Manageitems/></AdminRoute> 
             },
             {
                 path:'managebooking',
-                element:<Managebookings/>
+                element:<AdminRoute><Managebookings/></AdminRoute> 
             },
             {
                 path:'alluser',
-                element:<Allusers/>
+                element:<AdminRoute><Allusers/></AdminRoute> 
             },
         ]
     }
