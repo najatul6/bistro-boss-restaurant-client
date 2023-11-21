@@ -16,11 +16,12 @@ import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { CgLogIn } from "react-icons/cg";
 import Swal from "sweetalert2";
+import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext);
     // TODO: get is admin  vaulue from the database 
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     const handlelogOut = () => {
         logOut()
             .then(data => {
