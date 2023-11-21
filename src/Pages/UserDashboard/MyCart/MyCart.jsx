@@ -96,7 +96,7 @@ const MyCart = () => {
                                             <td>
                                                 <button
                                                     onClick={() => handleDeleteitem(item._id)}
-                                                    className="btn btn-ghost btn-lg text-2xl text-white bg-[#B91C1C] hover:text-[#B91C1C]"><MdDeleteForever /></button>
+                                                    className="btn btn-ghost btn-md text-2xl text-white bg-[#B91C1C] hover:text-[#B91C1C]"><MdDeleteForever /></button>
                                             </td>
                                         </tr>
                                     )

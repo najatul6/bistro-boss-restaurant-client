@@ -12,11 +12,7 @@ const Allusers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await axiossecure.get('/users',{
-                headers:{
-                    authorization:`Bearer ${localStorage.getItem('access-token')}`
-                }
-            });
+            const res = await axiossecure.get('/users');
             return res.data
         }
     })
@@ -142,7 +138,7 @@ const Allusers = () => {
                                         <td>
                                             <button
                                                 onClick={() => handleDeleteUser(user._id)}
-                                                className="btn btn-ghost btn-lg text-2xl text-white bg-[#B91C1C] hover:text-[#B91C1C]"><MdDeleteForever /></button>
+                                                className="btn btn-ghost btn-md text-2xl text-white bg-[#B91C1C] hover:text-[#B91C1C]"><MdDeleteForever /></button>
                                         </td>
                                     </tr>
                                 )
