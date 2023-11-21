@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
@@ -20,7 +20,7 @@ import useAdmin from "../Hooks/useAdmin";
 
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext);
-    // TODO: get is admin  vaulue from the database 
+    const navigate = useNavigate();
     const [isAdmin] = useAdmin();
     const handlelogOut = () => {
         logOut()
@@ -43,6 +43,7 @@ const Dashboard = () => {
                       `
                         }
                     });
+                    navigate('/')
                 }
 
             })
@@ -105,7 +106,7 @@ const Dashboard = () => {
                                         };
                                     }}
                                 >
-                                    <IoIosRestaurant/>
+                                    <IoIosRestaurant />
                                     add items
                                 </NavLink>
                             </li>
@@ -131,7 +132,7 @@ const Dashboard = () => {
                                         };
                                     }}
                                 >
-                                    <FaBook/>
+                                    <FaBook />
                                     Manage bookings
                                 </NavLink>
                             </li>
