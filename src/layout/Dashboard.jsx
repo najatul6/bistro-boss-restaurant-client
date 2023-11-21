@@ -3,8 +3,12 @@ import { FaHome } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { FaShoppingCart } from "react-icons/fa";
+import { TiGroup } from "react-icons/ti";
+import { HiMenu } from "react-icons/hi";
 import { GiWallet } from "react-icons/gi";
 import { MdRateReview } from "react-icons/md";
+import { IoIosRestaurant } from "react-icons/io";
+import { FaBook } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { HiMiniShoppingBag } from "react-icons/hi2";
 import { MdOutlineEditCalendar } from "react-icons/md";
@@ -76,84 +80,158 @@ const Dashboard = () => {
                 </div>
 
                 <ul className="menu my-4">
-                    <li>
-                        <NavLink to="/dashboard/userhome" className="hover:text-white md:text-xl uppercase"
-                            style={({ isActive }) => {
-                                return {
-                                    backgroundColor: isActive ? "transparent" : "",
-                                    color: isActive ? "#FFFFFF" : "",
-                                };
-                            }}
-                        >
-                            <FaHome></FaHome>
-                            User Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/reservation" className="hover:text-white md:text-xl uppercase"
-                            style={({ isActive }) => {
-                                return {
-                                    backgroundColor: isActive ? "transparent" : "",
-                                    color: isActive ? "#FFFFFF" : "",
-                                };
-                            }}
-                        >
-                            <FaRegCalendarAlt></FaRegCalendarAlt>
-                            reservation
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/payment" className="hover:text-white md:text-xl uppercase"
-                            style={({ isActive }) => {
-                                return {
-                                    backgroundColor: isActive ? "transparent" : "",
-                                    color: isActive ? "#FFFFFF" : "",
-                                };
-                            }}
-                        >
-                            <GiWallet></GiWallet>
-                            payment history
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/mycart" className="hover:text-white md:text-xl uppercase"
-                            style={({ isActive }) => {
-                                return {
-                                    backgroundColor: isActive ? "transparent" : "",
-                                    color: isActive ? "#FFFFFF" : "",
-                                };
-                            }}
-                        >
-                            <FaShoppingCart></FaShoppingCart>
-                            My Carts
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/addreview" className="hover:text-white md:text-xl uppercase"
-                            style={({ isActive }) => {
-                                return {
-                                    backgroundColor: isActive ? "transparent" : "",
-                                    color: isActive ? "#FFFFFF" : "",
-                                };
-                            }}
-                        >
-                            <MdRateReview></MdRateReview>
-                            add review
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/booking" className="hover:text-white md:text-xl uppercase"
-                            style={({ isActive }) => {
-                                return {
-                                    backgroundColor: isActive ? "transparent" : "",
-                                    color: isActive ? "#FFFFFF" : "",
-                                };
-                            }}
-                        >
-                            <MdOutlineEditCalendar />
-                            my booking
-                        </NavLink>
-                    </li>
+                    {
+                        isAdmin ? <>
+                            <li>
+                                <NavLink to="/dashboard/adminhome" className="hover:text-white md:text-xl uppercase"
+                                    style={({ isActive }) => {
+                                        return {
+                                            backgroundColor: isActive ? "transparent" : "",
+                                            color: isActive ? "#FFFFFF" : "",
+                                        };
+                                    }}
+                                >
+                                    <FaHome></FaHome>
+                                    Admin Home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/additem" className="hover:text-white md:text-xl uppercase"
+                                    style={({ isActive }) => {
+                                        return {
+                                            backgroundColor: isActive ? "transparent" : "",
+                                            color: isActive ? "#FFFFFF" : "",
+                                        };
+                                    }}
+                                >
+                                    <IoIosRestaurant/>
+                                    add items
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/manageitems" className="hover:text-white md:text-xl uppercase"
+                                    style={({ isActive }) => {
+                                        return {
+                                            backgroundColor: isActive ? "transparent" : "",
+                                            color: isActive ? "#FFFFFF" : "",
+                                        };
+                                    }}
+                                >
+                                    <HiMenu />
+                                    manage items
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/managebooking" className="hover:text-white md:text-xl uppercase"
+                                    style={({ isActive }) => {
+                                        return {
+                                            backgroundColor: isActive ? "transparent" : "",
+                                            color: isActive ? "#FFFFFF" : "",
+                                        };
+                                    }}
+                                >
+                                    <FaBook/>
+                                    Manage bookings
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/alluser" className="hover:text-white md:text-xl uppercase"
+                                    style={({ isActive }) => {
+                                        return {
+                                            backgroundColor: isActive ? "transparent" : "",
+                                            color: isActive ? "#FFFFFF" : "",
+                                        };
+                                    }}
+                                >
+                                    <TiGroup />
+                                    all users
+                                </NavLink>
+                            </li>
+                        </>
+                            :
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/userhome" className="hover:text-white md:text-xl uppercase"
+                                        style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "transparent" : "",
+                                                color: isActive ? "#FFFFFF" : "",
+                                            };
+                                        }}
+                                    >
+                                        <FaHome></FaHome>
+                                        User Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/reservation" className="hover:text-white md:text-xl uppercase"
+                                        style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "transparent" : "",
+                                                color: isActive ? "#FFFFFF" : "",
+                                            };
+                                        }}
+                                    >
+                                        <FaRegCalendarAlt></FaRegCalendarAlt>
+                                        reservation
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/payment" className="hover:text-white md:text-xl uppercase"
+                                        style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "transparent" : "",
+                                                color: isActive ? "#FFFFFF" : "",
+                                            };
+                                        }}
+                                    >
+                                        <GiWallet></GiWallet>
+                                        payment history
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/mycart" className="hover:text-white md:text-xl uppercase"
+                                        style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "transparent" : "",
+                                                color: isActive ? "#FFFFFF" : "",
+                                            };
+                                        }}
+                                    >
+                                        <FaShoppingCart></FaShoppingCart>
+                                        My Carts
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/addreview" className="hover:text-white md:text-xl uppercase"
+                                        style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "transparent" : "",
+                                                color: isActive ? "#FFFFFF" : "",
+                                            };
+                                        }}
+                                    >
+                                        <MdRateReview></MdRateReview>
+                                        add review
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/booking" className="hover:text-white md:text-xl uppercase"
+                                        style={({ isActive }) => {
+                                            return {
+                                                backgroundColor: isActive ? "transparent" : "",
+                                                color: isActive ? "#FFFFFF" : "",
+                                            };
+                                        }}
+                                    >
+                                        <MdOutlineEditCalendar />
+                                        my booking
+                                    </NavLink>
+                                </li>
+                            </>
+                    }
+
+                    {/* Shared Menu for Admin And User  */}
                     <div className="divider border-0 bg-white rounded-full h-1"></div>
                     <li>
                         <NavLink to="/" className="hover:text-white md:text-xl uppercase"

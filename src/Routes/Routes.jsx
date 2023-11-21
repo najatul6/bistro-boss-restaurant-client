@@ -10,6 +10,11 @@ import ErrorPage from "../Error Page/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layout/Dashboard";
 import MyCart from "../Pages/UserDashboard/MyCart/MyCart";
+import AdminHome from "../Pages/Admin Dashboard/Admin Home/AdminHome";
+import Additems from "../Pages/Admin Dashboard/Add items/Additems";
+import Manageitems from "../Pages/Admin Dashboard/Manage items/Manageitems";
+import Managebookings from "../Pages/Admin Dashboard/Manage bookings/Managebookings";
+import Allusers from "../Pages/Admin Dashboard/Allusers/Allusers";
 
 const Routes = createBrowserRouter([
     {
@@ -49,9 +54,33 @@ const Routes = createBrowserRouter([
         element:<Dashboard></Dashboard>,
         children:[
             {
-                path:'/dashboard/mycart',
+                path:'mycart',
                 element:<MyCart></MyCart>
-            }
+            },
+
+
+
+            // Admin Section 
+            {
+                path:'adminhome',
+                element:<AdminHome/>
+            },
+            {
+                path:'additem',
+                element:<Additems/>
+            },
+            {
+                path:'manageitems',
+                element:<Manageitems/>
+            },
+            {
+                path:'managebooking',
+                element:<Managebookings/>
+            },
+            {
+                path:'alluser',
+                element:<Allusers/>
+            },
         ]
     }
 ])
