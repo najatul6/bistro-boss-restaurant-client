@@ -31,7 +31,7 @@ const MyCart = () => {
                                 icon: "success"
                             });
                         }
-                        else{
+                        else {
                             Swal.fire({
                                 title: "Opps!",
                                 text: "Your file isn't deleted.",
@@ -81,11 +81,9 @@ const MyCart = () => {
                                                 </label>
                                             </th>
                                             <td>
-                                                <div className="">
-                                                    <div className="avatar">
-                                                        <div className="rounded  w-12 h-12">
-                                                            <img src={item.image} alt="Avatar Tailwind CSS Component" />
-                                                        </div>
+                                                <div className="avatar">
+                                                    <div className="rounded  w-12 h-12">
+                                                        <img src={item.image} alt="Avatar Tailwind CSS Component" />
                                                     </div>
                                                 </div>
                                             </td>
