@@ -16,73 +16,79 @@ import Manageitems from "../Pages/Admin Dashboard/Manage items/Manageitems";
 import Managebookings from "../Pages/Admin Dashboard/Manage bookings/Managebookings";
 import Allusers from "../Pages/Admin Dashboard/Allusers/Allusers";
 import AdminRoute from "./AdminRoute";
+import UpadateItem from "../Pages/Admin Dashboard/Manage items/UpadateItem";
 
 const Routes = createBrowserRouter([
     {
-        path:'/',
-        element:<MainLayout></MainLayout>,
-        errorElement:<ErrorPage/>,
-        children:[
+        path: '/',
+        element: <MainLayout></MainLayout>,
+        errorElement: <ErrorPage />,
+        children: [
             {
-                path:'/',
-                element:<Home/>
+                path: '/',
+                element: <Home />
             },
             {
-                path:'contact',
-                element:<PrivateRoute><Contact/></PrivateRoute>
+                path: 'contact',
+                element: <PrivateRoute><Contact /></PrivateRoute>
             },
             {
-                path:'ourmenu',
-                element:<OurMenu/>
+                path: 'ourmenu',
+                element: <OurMenu />
             },
             {
-                path:'ourshop/:category',
-                element:<OurShop/>
+                path: 'ourshop/:category',
+                element: <OurShop />
             },
-            
+
         ],
     },
     {
-        path:'signUp',
-        element:<Register/>
+        path: 'signUp',
+        element: <Register />
     },
     {
-        path:'signIn',
-        element:<LogIn/>
+        path: 'signIn',
+        element: <LogIn />
     },
     {
-        path:'dashboard',
-        element:<Dashboard></Dashboard>,
-        children:[
+        path: 'dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
             // user Section 
             {
-                path:'mycart',
-                element:<MyCart></MyCart>
+                path: 'mycart',
+                element: <MyCart></MyCart>
             },
 
 
 
             // Admin Section 
             {
-                path:'adminhome',
-                element:<AdminRoute><AdminHome/></AdminRoute>
+                path: 'adminhome',
+                element: <AdminRoute><AdminHome /></AdminRoute>
             },
             {
-                path:'additem',
-                element:<AdminRoute><Additems/></AdminRoute> 
+                path: 'additem',
+                element: <AdminRoute><Additems /></AdminRoute>
             },
             {
-                path:'manageitems',
-                element:<AdminRoute><Manageitems/></AdminRoute> 
+                path: 'manageitems',
+                element: <AdminRoute><Manageitems /></AdminRoute>
             },
             {
-                path:'managebooking',
-                element:<AdminRoute><Managebookings/></AdminRoute> 
+                path: 'managebooking',
+                element: <AdminRoute><Managebookings /></AdminRoute>
             },
             {
-                path:'alluser',
-                element:<AdminRoute><Allusers/></AdminRoute> 
+                path: 'alluser',
+                element: <AdminRoute><Allusers /></AdminRoute>
             },
+            {
+                path: 'updatateItem/:id',
+                element: <UpadateItem></UpadateItem>,
+                loader: ({ params })=> fetch(`http://localhost:5000/menu/${params.id}`)
+            }
         ]
     }
 ])

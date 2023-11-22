@@ -4,6 +4,7 @@ import useMenu from "../../../Hooks/useMenu";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Manageitems = () => {
     const [menu, refetch] = useMenu();
@@ -23,12 +24,12 @@ const Manageitems = () => {
             if (result.isConfirmed) {
                 const res = await axiosSecure.delete(`/menu/${item._id}`)
                 if (res.data.deletedCount > 0) {
-                    refetch();
                     Swal.fire({
                         title: "Deleted!",
                         text: `${item.name} has been deleted.`,
                         icon: "success"
                     });
+                    refetch();
                 }
             }
         });
@@ -80,9 +81,11 @@ const Manageitems = () => {
                                             {item.price}
                                         </td>
                                         <td>
-                                            <button className="btn btn-ghost btn-md text-2xl text-white bg-[#B91C1C] hover:text-[#B91C1C]">
-                                                <FaEdit />
-                                            </button>
+                                            <Link to={`/dashboard/updatateItem/${item._id}`}>
+                                                <button className="btn btn-ghost btn-md text-2xl text-white bg-[#B91C1C] hover:text-[#B91C1C]">
+                                                    <FaEdit />
+                                                </button>
+                                            </Link>
                                         </td>
                                         <td>
                                             <button
