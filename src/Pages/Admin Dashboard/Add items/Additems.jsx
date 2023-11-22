@@ -2,23 +2,40 @@ import { IoIosRestaurant } from "react-icons/io";
 import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
-const image_hosting_key= import.meta.env.VITE_IMAGE_HOSTING;
-const image_hosting_api =`https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Additems = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit,reset } = useForm();
     const axiosPublic = useAxiosPublic();
-    const onSubmit = async(data) => {
-        // Upload this image and get a url and set it 
-        const imageFile = {image: data.image[0]}
-        const res = await axiosPublic.post(image_hosting_api, imageFile, {
-            headers:{
+    const axiosSecure = useAxiosSecure();
 
-                'content-Type' :'multipart/form-data'
+    const onSubmit = async (data) => {
+        // Upload this image and get a url and set it 
+        const imageFile = { image: data.image[0] }
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-Type': 'multipart/form-data'
             }
         });
-        console.log(res.data)
+        console.log(res.data, data)
+        if(res.data.success){
+            const menuItem = {
+                name: data.name,
+                recipe: data.recipe,
+                image: res.data.data.display_url,
+                category: data.category,
+                price:parseFloat(data.price),
+            }
+           const menuRes= await axiosSecure.post('/menu',menuItem)
+           if(menuRes.data.insertedId){
+            reset();
+            Swal.fire(`${data.name} is Added!`);
+           }
+        }
     }
     return (
         <div>
@@ -45,7 +62,7 @@ const Additems = () => {
                                 <span className="label-text font-bold text-xl">Category*</span>
                             </label>
                             <select
-                            defaultValue="default"
+                                defaultValue="default"
                                 {...register("category", { required: true })}
                                 className="select select-bordered w-full">
                                 <option disabled value="default">Category</option>
@@ -88,7 +105,7 @@ const Additems = () => {
                     </div>
 
                     <button
-                        // type="submit"
+                        type="submit"
                         className="btn bg-gradient-to-r from-[#835D23] to-[#B58130] text-white text-xl rounded-none">
                         Add item <IoIosRestaurant />
                     </button>
