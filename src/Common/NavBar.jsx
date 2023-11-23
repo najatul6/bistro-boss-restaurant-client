@@ -156,18 +156,17 @@ const NavBar = () => {
                                         </div>
                                     </label>
                                     <ul tabIndex={0} className="mt-4 z-[1]shadow hover:bg-none menu menu-sm dropdown-content bg-gray-900 rounded-box">
-                                        <div className="px-5 text-white">
-                                            <li className="font-bold capitalize">
-                                                {user?.displayName}
-                                            </li>
-                                            <li className="text-[#ffffff83] pl-2">
-                                                {user?.email}
-                                            </li>
+                                        <div className="px-5 text-white min-w-max">
+                                            <ul>
+                                                <li className="font-bold capitalize">
+                                                    {user?.displayName}
+                                                </li>
+                                            </ul>
                                         </div>
                                         <hr className="my-5" />
                                         <div>
                                             <li>
-                                                <NavLink to='/dashboard' className="hover:text-white md:text-xl"
+                                                <NavLink to='/dashboard/userhome' className="hover:text-white md:text-xl"
                                                     style={({ isActive }) => {
                                                         return {
                                                             backgroundColor: isActive ? "transparent" : "",
