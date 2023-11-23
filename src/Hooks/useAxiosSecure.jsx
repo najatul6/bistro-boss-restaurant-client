@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
-const axiossecure = axios.create({
+const axiosSecure = axios.create({
     baseURL: 'http://localhost:5000'
 });
 
@@ -11,7 +11,7 @@ const useAxiosSecure = () => {
     const { logOut } = useAuth();
 
     // Add a request interceptor
-    axiossecure.interceptors.request.use(function (config) {
+    axiosSecure.interceptors.request.use(function (config) {
         const token = localStorage.getItem('access-token')
         config.headers.authorization = `Bearer ${token}`
         return config;
@@ -21,7 +21,7 @@ const useAxiosSecure = () => {
     });
 
     // Add a response interceptor
-    axiossecure.interceptors.response.use(function (response) {
+    axiosSecure.interceptors.response.use(function (response) {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
         return response;
@@ -33,7 +33,7 @@ const useAxiosSecure = () => {
         }
         return Promise.reject(error);
     });
-    return axiossecure;
+    return axiosSecure;
 };
 
 export default useAxiosSecure;

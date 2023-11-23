@@ -17,11 +17,13 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { CgLogIn } from "react-icons/cg";
 import Swal from "sweetalert2";
 import useAdmin from "../Hooks/useAdmin";
+import useCarts from "../Hooks/useCarts";
 
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext);
     const navigate = useNavigate();
     const [isAdmin] = useAdmin();
+    const[cart] = useCarts();
     const handlelogOut = () => {
         logOut()
             .then(data => {
@@ -179,7 +181,7 @@ const Dashboard = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/dashboard/payment" className="hover:text-white md:text-xl uppercase"
+                                    <NavLink to="/dashboard/paymentHistory" className="hover:text-white md:text-xl uppercase"
                                         style={({ isActive }) => {
                                             return {
                                                 backgroundColor: isActive ? "transparent" : "",
@@ -201,7 +203,7 @@ const Dashboard = () => {
                                         }}
                                     >
                                         <FaShoppingCart></FaShoppingCart>
-                                        My Carts
+                                        My Carts({cart.length})
                                     </NavLink>
                                 </li>
                                 <li>

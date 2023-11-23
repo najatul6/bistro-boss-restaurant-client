@@ -4,10 +4,11 @@ import useCarts from "../../../Hooks/useCarts";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
     const [cart, refetch] = useCarts();
-    const totalPrice = cart.reduce((total, item) => total + item.itemPrice, 0);
+    const totalPrice = cart.reduce((total, item) => total + item.price, 0);
     const axiossecure = useAxiosSecure();
 
     const handleDeleteitem = id => {
@@ -57,7 +58,12 @@ const MyCart = () => {
                     <div className="flex justify-evenly items-center  mb-10">
                         <p className="text-xl md:text-3xl uppercase font-bold">Total orders: {cart.length}</p>
                         <p className="text-xl md:text-3xl uppercase font-bold">total price: {totalPrice}</p>
-                        <button className="btn bg-[#D1A054]">Pay</button>
+                        {cart?.length ?
+                            <Link to='/dashboard/payment'>
+                                <button className="btn bg-[#D1A054]">Pay</button>
+                            </Link> :
+                            <button disabled className="btn bg-[#D1A054]">Pay</button>
+                        }
                     </div>
                     <div className="overflow-x-auto rounded-2xl">
                         <table className="table w-full">
@@ -90,7 +96,7 @@ const MyCart = () => {
                                             <td>
                                                 {item.itemName}
                                             </td>
-                                            <td>{item.itemPrice}</td>
+                                            <td>{item.price}</td>
                                             <td>
                                                 <button
                                                     onClick={() => handleDeleteitem(item._id)}

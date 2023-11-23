@@ -188,41 +188,6 @@ const NavBar = () => {
                             <button className="btn rounded-xl bg-transparent text-white md:text-xl hover:bg-[#1F2937] border-0 hover:text-[#EEFF25] border-b-[#EEFF25] border-b-4 hover:border-b-[#1F2937]">Log In <CgLogIn /></button>
                         </Link>
                 }
-
-                {/* {
-                    user ? <div>
-
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img src={user?.photoURL} />
-                            </div>
-                        </label>
-                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
-                                <a className="justify-between">
-                                    {user?.displayName}
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <button onClick={handlelogOut} className="btn my-1 bg-[#f16022] text-white">Log Out <CgLogIn /></button>
-                        </ul>
-                        <div className="dropdown  dropdown-bottom dropdown-end">
-                            <div className="avatar">
-                                <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src={user?.photoURL} />
-                                </div>
-                            </div>
-                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><a>{user?.displayName}</a></li>
-                                <li><a>{user?.email}</a></li>
-                            </ul>
-                        </div>
-                         
-                    </div> : <>
-
-                       
-                    </>
-                } */}
             </div>
         </div>
     );

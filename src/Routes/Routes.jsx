@@ -17,6 +17,12 @@ import Managebookings from "../Pages/Admin Dashboard/Manage bookings/Managebooki
 import Allusers from "../Pages/Admin Dashboard/Allusers/Allusers";
 import AdminRoute from "./AdminRoute";
 import UpadateItem from "../Pages/Admin Dashboard/Manage items/UpadateItem";
+import UserHome from "../Pages/UserDashboard/User Home/UserHome";
+import Reservation from "../Pages/UserDashboard/Reservation/Reservation";
+import Payment from "../Pages/UserDashboard/Payment history/Payment";
+import AddReview from "../Pages/UserDashboard/Add review/AddReview";
+import MyBooking from "../Pages/UserDashboard/My booking/MyBooking";
+import PaymentHistory from "../Pages/UserDashboard/Payment history/PaymentHistory";
 
 const Routes = createBrowserRouter([
     {
@@ -57,11 +63,33 @@ const Routes = createBrowserRouter([
         children: [
             // user Section 
             {
-                path: 'mycart',
-                element: <MyCart></MyCart>
+                path: 'userHome',
+                element: <UserHome />
             },
-
-
+            {
+                path: 'reservation',
+                element: <Reservation />
+            },
+            {
+                path: 'paymentHistory',
+                element: <PaymentHistory />
+            },
+            {
+                path: 'payment',
+                element: <Payment />
+            },
+            {
+                path: 'mycart',
+                element: <MyCart />
+            },
+            {
+                path: 'addReview',
+                element: <AddReview />
+            },
+            {
+                path: 'booking',
+                element: <MyBooking />
+            },
 
             // Admin Section 
             {
@@ -87,7 +115,7 @@ const Routes = createBrowserRouter([
             {
                 path: 'updatateItem/:id',
                 element: <UpadateItem></UpadateItem>,
-                loader: ({ params })=> fetch(`http://localhost:5000/menu/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/menu/${params.id}`)
             }
         ]
     }
