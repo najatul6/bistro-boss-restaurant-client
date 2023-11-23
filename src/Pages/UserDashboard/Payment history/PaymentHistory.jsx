@@ -3,13 +3,15 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
+
+
 const PaymentHistory = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const { data: payments = [] } = useQuery({
-        queryKey: ['payments', user.email],
+        queryKey: ['payments', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure(`/payments/${user.email}`)
+            const res = await axiosSecure(`/payments/${user?.email}`)
             return res.data
         }
     })
