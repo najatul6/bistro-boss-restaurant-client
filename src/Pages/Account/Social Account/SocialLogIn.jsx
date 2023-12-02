@@ -28,21 +28,11 @@ const SocialLogIn = () => {
                     .then(res => {
                         if (res.data) {
                             Swal.fire({
+                                position: "top-end",
+                                icon: "success",
                                 title: "Log In Successful With Facebook",
-                                showClass: {
-                                    popup: `
-                            animate__animated
-                            animate__fadeInDown
-                            animate__faster
-                          `
-                                },
-                                hideClass: {
-                                    popup: `
-                            animate__animated
-                            animate__fadeOutUp
-                            animate__faster
-                          `
-                                }
+                                showConfirmButton: false,
+                                timer: 1500
                             });
                             navigate(from, { replace: true });
                         }
@@ -64,21 +54,11 @@ const SocialLogIn = () => {
                     .then(res => {
                         if (res.data) {
                             Swal.fire({
+                                position: "top-end",
+                                icon: "success",
                                 title: "Log In Successful With Google",
-                                showClass: {
-                                    popup: `
-                        animate__animated
-                        animate__fadeInDown
-                        animate__faster
-                      `
-                                },
-                                hideClass: {
-                                    popup: `
-                        animate__animated
-                        animate__fadeOutUp
-                        animate__faster
-                      `
-                                }
+                                showConfirmButton: false,
+                                timer: 1500
                             });
                             navigate(from, { replace: true });
                         }
@@ -99,21 +79,11 @@ const SocialLogIn = () => {
                     .then(res => {
                         if (res.data) {
                             Swal.fire({
+                                position: "top-end",
+                                icon: "success",
                                 title: "Log In Successful With Github",
-                                showClass: {
-                                    popup: `
-                                animate__animated
-                                animate__fadeInDown
-                                animate__faster
-                              `
-                                },
-                                hideClass: {
-                                    popup: `
-                                animate__animated
-                                animate__fadeOutUp
-                                animate__faster
-                              `
-                                }
+                                showConfirmButton: false,
+                                timer: 1500
                             });
                             navigate(from, { replace: true });
                         }

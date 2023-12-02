@@ -115,7 +115,7 @@ const Routes = createBrowserRouter([
             {
                 path: 'updatateItem/:id',
                 element: <UpadateItem></UpadateItem>,
-                loader: ({ params }) => fetch(`http://localhost:5000/menu/${params.id}`)
+                loader: ({ params }) => fetch(`https://bistro-boss-server-side-rust.vercel.app/menu/${params.id}`)
             }
         ]
     }

@@ -1,5 +1,6 @@
+import PropTypes from "prop-types";
 
-const DashBoardHome = ({firstIcon, firstCount,firstName, secondIcon,secontCount: secondCount, secondName,thirdIcon,thirdCount, thirdName}) => {
+const DashBoardHome = ({firstIcon, firstCount,firstName, secondIcon, secondCount, secondName,thirdIcon,thirdCount, thirdName}) => {
     return (
         <div className="grid grid-cols-3 items-center gap-6 my-6">
             <div className="bg-gradient-to-r from-[#BB34F5] to-[#FCDBFF] flex justify-center items-center gap-3 text-white py-9 rounded-xl">
@@ -32,5 +33,17 @@ const DashBoardHome = ({firstIcon, firstCount,firstName, secondIcon,secontCount:
         </div>
     );
 };
+
+DashBoardHome.propTypes = {
+    firstIcon:PropTypes.any,
+    firstCount:PropTypes.any,
+    firstName:PropTypes.any,
+    secondIcon:PropTypes.any,
+    secondCount:PropTypes.any, 
+    secondName:PropTypes.any,
+    thirdIcon:PropTypes.any,
+    thirdCount:PropTypes.any, 
+    thirdName:PropTypes.any,
+}
 
 export default DashBoardHome;
