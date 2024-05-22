@@ -30,7 +30,6 @@ const LogIn = () => {
         logIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user)
                 Swal.fire({
                     title: "Log In Successful",
                     showClass: {

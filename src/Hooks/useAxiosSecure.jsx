@@ -17,7 +17,7 @@ const useAxiosSecure = () => {
         return config;
     }, function (error) {
         // Do something with request error
-        return Promise.reject(error);
+        return Promise?.reject(error);
     });
 
     // Add a response interceptor
@@ -26,7 +26,7 @@ const useAxiosSecure = () => {
         // Do something with response data
         return response;
     }, async (error) => {
-        const status = error.response.status;
+        const status = error?.response?.status;
         if (status === 401 || status === 403) {
             await logOut();
             navigate('/signIn')

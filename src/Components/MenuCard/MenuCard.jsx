@@ -15,7 +15,7 @@ const MenuCard = ({ items, bgImg, title, details }) => {
             <div className="grid my-5 px-2 grid-cols-1 lg:grid-cols-2 gap-10">
                 {
                     items?.map(item => <MenuItems
-                        key={item._id}
+                        key={item?._id}
                         item={item}
                     ></MenuItems>)
                 }

@@ -6,17 +6,6 @@ import useAxiosPublic from "./useAxiosPublic";
 const useMenu = () => {
     const axiosPublic = useAxiosPublic();
 
-    //    const [menu, setMenu]= useState([])
-    //    const [loading, setloading] = useState(true)
-    //    useEffect(()=>{
-    //     fetch('https://bistro-boss-server-side-rust.vercel.app/menu')
-    //     .then(res=>res.json())
-    //     .then(data=>{
-    //         setMenu(data);
-    //         setloading(false);
-    //     })
-    //    },[])
-
     const { data: menu = [], isPending: loading, refetch } = useQuery({
         queryKey: 'menu',
         queryFn: async () => {
