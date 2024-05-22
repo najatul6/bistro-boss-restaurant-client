@@ -39,7 +39,7 @@ const OurMenu = () => {
                 />
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {
-                        offeredItem.map(item => <MenuItems key={item._id} item={item}></MenuItems>)
+                        offeredItem?.map(item => <MenuItems key={item?._id} item={item}></MenuItems>)
                     }
                 </div>
                 <Link to="/ourshop/Offer" className="flex justify-center items-center my-5">

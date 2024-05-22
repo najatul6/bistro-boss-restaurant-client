@@ -60,9 +60,9 @@ const MyCart = () => {
                         <p className="text-xl md:text-3xl uppercase font-bold">total price: {totalPrice}</p>
                         {cart?.length ?
                             <Link to='/dashboard/payment'>
-                                <button className="btn bg-[#D1A054]">Pay</button>
+                                <button className="btn bg-[#D1A054] border-white">Pay</button>
                             </Link> :
-                            <button disabled className="btn bg-[#D1A054]">Pay</button>
+                            <button disabled className="btn bg-[#D1A054] border-white">Pay</button>
                         }
                     </div>
                     <div className="overflow-x-auto rounded-2xl">
@@ -89,7 +89,7 @@ const MyCart = () => {
                                             <td>
                                                 <div className="avatar">
                                                     <div className="rounded  w-12 h-12">
-                                                        <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                                                        <img src={item.image} alt="Avatar" />
                                                     </div>
                                                 </div>
                                             </td>
@@ -100,7 +100,7 @@ const MyCart = () => {
                                             <td>
                                                 <button
                                                     onClick={() => handleDeleteitem(item._id)}
-                                                    className="btn btn-ghost btn-md text-2xl text-white bg-[#B91C1C] hover:text-[#B91C1C]"><MdDeleteForever /></button>
+                                                    className="btn btn-ghost border-white btn-md text-2xl text-white bg-[#B91C1C] hover:text-[#B91C1C]"><MdDeleteForever /></button>
                                             </td>
                                         </tr>
                                     )
