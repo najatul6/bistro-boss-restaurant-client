@@ -31,7 +31,8 @@ const LogIn = () => {
             .then(result => {
                 const user = result.user;
                 Swal.fire({
-                    title: "Log In Successful",
+                    title: `Welcome ${user.displayName}`,
+                    text: "You have successfully logged in",
                     showClass: {
                         popup: `
                         animate__animated
